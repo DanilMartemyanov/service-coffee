@@ -2,9 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Account</title>
 </head>
 <body>
-<div>Начало</div>
+Your Account
 </body>
 </html>

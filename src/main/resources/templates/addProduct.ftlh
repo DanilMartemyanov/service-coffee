@@ -16,7 +16,7 @@
         <h2>Добавить товар</h2>
     </div>
     <div>
-        <form action="/addProduct" method="post" enctype="multipart/form-data">
+        <form id="form">
             <label for="nameProduct">Название</label>
             <div>
                 <input type="text" name="nameProduct" id="nameProduct">
@@ -45,12 +45,13 @@
             <div>
                 <input type="file" name="file" id="file">
             </div>
-            <button type="submit">Добавить товар</button>
+            <button type="submit" id="btnSubmit">Добавить товар</button>
         </form>
     </div>
-    <div>
-        <button onclick="cardProduct($('#nameProduct').val())">Посмотреть карточку товара</button>
-    </div>
+    <script src="/js/sendDataProduct.js"></script>
+<#--    <div>-->
+<#--        <a href="http://localhost:8080/cardProduct/" + response><button>Посмотреть карточку товара</button></a>-->
+<#--    </div>-->
 </div>
 </body>
 </html>

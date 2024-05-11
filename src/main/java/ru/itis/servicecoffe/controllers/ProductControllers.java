@@ -36,22 +36,26 @@ public class ProductControllers {
     @PostMapping("/addProduct")
     public String addProduct(@RequestParam("file")MultipartFile file, ProductForm productForm){
         System.out.println("запрос по продукту");
-        ProductDto productDto = productService.addProduct(productForm);
-        System.out.println(productDto.getName());
+//        ProductDto productDto = productService.addProduct(productForm);
+//        System.out.println(productDto.getName());
         System.out.println("-----------");
+        System.out.println(productForm.getCategory());
+        System.out.println(productForm.getNameProduct());
+        System.out.println(file.getName());
         System.out.println("запрос по файлу");
-        fileServices.upload(file, productDto);
+//        fileServices.upload(file, productDto);
         return "redirect:/addProduct";
     }
 
-    @PostMapping("/cardProduct")
-    public ResponseEntity<ProductDto> getCardProduct(@RequestBody CardNameProductForm cardNameProductForm){
-        ProductDto productDto = productService.getProductDto(cardNameProductForm.getNameProduct());
-        System.out.println("---------");
-        System.out.println(productDto.getPrice());
-        System.out.println("---------");
-        return ResponseEntity.ok(productDto);
-    }
+//    @PostMapping("/cardProduct/")
+//    public ResponseEntity<ProductDto> getCardProduct(@RequestBody CardNameProductForm cardNameProductForm){
+//        ProductDto productDto = productService.getProductDto(cardNameProductForm.getNameProduct());
+//        System.out.println("---------");
+//        System.out.println(productDto.getPrice());
+//        System.out.println("---------");
+//        return ResponseEntity.ok(productDto);
+//    }
+    @GetMapping("/")
 
 
 }

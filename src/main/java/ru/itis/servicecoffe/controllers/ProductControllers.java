@@ -1,6 +1,8 @@
 package ru.itis.servicecoffe.controllers;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -17,7 +19,9 @@ import ru.itis.servicecoffe.services.FileServices;
 import ru.itis.servicecoffe.services.ProductService;
 import ru.itis.servicecoffe.services.ProductServiceImpl;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class ProductControllers {
@@ -27,24 +31,18 @@ public class ProductControllers {
     ProductService productService;
     @Autowired
     FileServices fileServices;
+    private ProductForm productForm;
+
     @GetMapping("/addProduct")
     public String getAddProductPage(Model model){
-        model.addAttribute("categories", categoryService.getCategories());
+//        model.addAttribute("categories", categoryService.getCategories());
         return "addProduct";
     }
 
-    @PostMapping("/addProduct")
-    public String addProduct(@RequestParam("file")MultipartFile file, ProductForm productForm){
-        System.out.println("запрос по продукту");
-//        ProductDto productDto = productService.addProduct(productForm);
-//        System.out.println(productDto.getName());
-        System.out.println("-----------");
-        System.out.println(productForm.getCategory());
-        System.out.println(productForm.getNameProduct());
-        System.out.println(file.getName());
-        System.out.println("запрос по файлу");
-//        fileServices.upload(file, productDto);
-        return "redirect:/addProduct";
+    @PostMapping(value = "/addProduct", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<?> addProduct(@RequestBody ProductForm productForm){
+        ProductDto productDto = productService.addProduct(productForm);
+        return ResponseEntity.ok().body(productDto);
     }
 
 //    @PostMapping("/cardProduct/")
@@ -55,7 +53,12 @@ public class ProductControllers {
 //        System.out.println("---------");
 //        return ResponseEntity.ok(productDto);
 //    }
-    @GetMapping("/")
+//    @GetMapping("/")
 
-
+//    @PostMapping("/test")
+//    public String test(@RequestParam("file")MultipartFile file, ProductForm productForm){
+//        System.out.println(productForm.getNameProduct());
+//        System.out.println(file);
+//        return "redirect:/addProduct";
+//    }
 }

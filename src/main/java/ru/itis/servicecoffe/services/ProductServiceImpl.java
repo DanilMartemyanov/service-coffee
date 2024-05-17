@@ -23,22 +23,23 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public ProductDto addProduct(ProductForm productForm) {
         try{
-            Long categoryId = (long) productForm.getCategory();
-            System.out.println("тут ошибка");
-            Category category = categoryRepositories.findById(categoryId).orElseThrow(()-> new EntityNotFoundException("Категория не найдена"));
-            System.out.println("----------");
-            System.out.println(category.getName());
+//            Long categoryId = (long) productForm.getCategory();
+//            System.out.println(categoryId);
+//            Category category = categoryRepositories.findById(categoryId).orElseThrow(()-> new EntityNotFoundException("Категория не найдена"));
             Product product = Product.builder()
                     .name(productForm.getNameProduct())
                     .compound(productForm.getCompound())
-                    .price(productForm.getPrice())
-                    .cookingTime(productForm.getCookingTime())
-                    .category(category)
+                    .price(Integer.parseInt(productForm.getPrice()))
+                    .cookingTime(Integer.parseInt(productForm.getCookingTime()))
+//                    .category(category)
                     .build();
             productRepositories.save(product);
             Product productForfile = productRepositories.findByName(product.getName());
+            System.out.println(productForfile.getId());
+            System.out.println(productForfile.getName());
             return ProductDto.from(productForfile);
-        }catch (RuntimeException e){
+        }catch (IllegalArgumentException e){
+            System.out.println("тут");
             System.out.println(e.getMessage());
             return null;
             // написать свой класс с исключениями

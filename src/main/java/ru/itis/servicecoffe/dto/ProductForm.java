@@ -14,7 +14,7 @@ import java.io.File;
 public class ProductForm {
     private String nameProduct;
     private String compound;
-    private int cookingTime;
-    private int price;
-    private int category;
+    private String cookingTime;
+    private String price;
+//    private int category;
 }

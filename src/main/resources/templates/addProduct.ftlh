@@ -2,9 +2,8 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <script src="/js/uploadFile.js"></script>
     <script src="/js/cardProduct.js"></script>
-    <title>AddCoffe</title>
+    <title>AddProduct</title>
 </head>
 <body>
 <script
@@ -16,7 +15,7 @@
         <h2>Добавить товар</h2>
     </div>
     <div>
-        <form id="form">
+        <form id="formProduct" >
             <label for="nameProduct">Название</label>
             <div>
                 <input type="text" name="nameProduct" id="nameProduct">
@@ -33,25 +32,26 @@
             <div>
                 <input type="number" name="price" id="price">
             </div>
-            <label for="category">Категория</label>
-                 <div>
-                    <select name="category" id="category">
-                        <#list categories as category>
-                            <option value="${category.id}">${category.name}</option>
-                        </#list>
-                    </select>
-                 </div>
-            <label for="file">Добавить фото товара</label>
-            <div>
-                <input type="file" name="file" id="file">
-            </div>
+<#--            <label for="category">Категория</label>-->
+<#--                 <div>-->
+<#--                    <select name="category" id="category">-->
+<#--                        <#list categories as category>-->
+<#--                            <option value="${category.id}">${category.name}</option>-->
+<#--                        </#list>-->
+<#--                    </select>-->
+<#--                 </div>-->
             <button type="submit" id="btnSubmit">Добавить товар</button>
         </form>
     </div>
-    <script src="/js/sendDataProduct.js"></script>
-<#--    <div>-->
-<#--        <a href="http://localhost:8080/cardProduct/" + response><button>Посмотреть карточку товара</button></a>-->
-<#--    </div>-->
+    <script src="/js/sendDataProductFetch.js"></script>
+    <div>
+        <form id="formFile">
+            <label for="file">Загрузить фото </label>
+            <input type="file" name="file" id="file">
+            <button type="submit" id="btnSubmitFile">Загрузить фото продукта</button>
+        </form>
+    </div>
+    <script src="/js/uploadFile.js"></script>
 </div>
 </body>
 </html>

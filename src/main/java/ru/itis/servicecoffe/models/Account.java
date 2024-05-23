@@ -41,4 +41,13 @@ public class Account {
     public boolean isUser(){
         return this.Role == Role.USER;
     }
+    @ManyToMany
+    @JoinTable(name = "favoriteProducts",
+            joinColumns = @JoinColumn(name = "account_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "product_id", referencedColumnName = "id")
+    )
+    private List<Product> products;
+
+    @OneToMany(mappedBy = "account")
+    private List<FileInfo> avatars;
 }

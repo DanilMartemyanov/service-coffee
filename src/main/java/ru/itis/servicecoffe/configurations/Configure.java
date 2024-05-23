@@ -11,6 +11,7 @@ import org.springframework.web.multipart.support.MultipartFilter;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import ru.itis.servicecoffe.services.ConvertTimeImpl;
 
 @EnableWebMvc
 @Configuration
@@ -33,5 +34,7 @@ public class Configure implements WebMvcConfigurer {
                 .addResourceLocations("resources/", "static/", "public/", "META-INF/resources/")
                 .addResourceLocations("classpath:resources/", "classpath:static/", "classpath:public/", "classpath:META-INF/resources/");
     }
+    @Bean
+    public ConvertTimeImpl convertTime(){return  new ConvertTimeImpl();}
 
 }

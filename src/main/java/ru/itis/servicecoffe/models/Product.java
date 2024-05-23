@@ -28,4 +28,9 @@ public class Product {
     @OneToMany(mappedBy = "product")
     private List<FileInfo> images;
 
+    @ManyToMany(mappedBy = "products")
+    private List<Account> accounts;
+
+
+
 }

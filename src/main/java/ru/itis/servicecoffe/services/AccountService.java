@@ -1,9 +1,9 @@
 package ru.itis.servicecoffe.services;
 
 
-import ru.itis.servicecoffe.dto.EmailForm;
-import ru.itis.servicecoffe.dto.PhoneForm;
-import ru.itis.servicecoffe.dto.SignUpForms;
+import ru.itis.servicecoffe.dto.*;
+import ru.itis.servicecoffe.models.Account;
+import ru.itis.servicecoffe.models.Product;
 
 
 public interface AccountService {
@@ -14,4 +14,8 @@ public interface AccountService {
     void sendEmailForConfirm(EmailForm emailForm);
 
     boolean checkAccount(String code);
+
+    Long addFavoriteProduct(ProductIdForm productIdForm, String username);
+
+    AccountDto findByUserName(String username);
 }

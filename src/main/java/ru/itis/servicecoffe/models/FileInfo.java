@@ -24,4 +24,8 @@ public class FileInfo {
     @ManyToOne
     @JoinColumn(name = "productId")
     private Product product;
+
+    @ManyToOne
+    @JoinColumn(name = "accountId")
+    private Account account;
 }

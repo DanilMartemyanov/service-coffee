@@ -7,9 +7,12 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
+import ru.itis.servicecoffe.dto.FileInfoDto;
 import ru.itis.servicecoffe.dto.ProductDto;
+import ru.itis.servicecoffe.models.Account;
 import ru.itis.servicecoffe.models.FileInfo;
 import ru.itis.servicecoffe.models.Product;
+import ru.itis.servicecoffe.repositories.AccountRepository;
 import ru.itis.servicecoffe.repositories.FileInfoRepositories;
 import ru.itis.servicecoffe.repositories.ProductRepositories;
 
@@ -19,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
+import java.util.Set;
 import java.util.UUID;
 
 @Component
@@ -27,6 +31,8 @@ public class FileServicesImpl implements FileServices {
     FileInfoRepositories fileInfoRepositories;
     @Autowired
     ProductRepositories productRepositories;
+    @Autowired
+    AccountRepository accountRepository;
 
 
 
@@ -66,5 +72,51 @@ public class FileServicesImpl implements FileServices {
             throw new RuntimeException(e);
         }
     }
+
+    @Override
+    public String getStorageFileName(Long productId) {
+        FileInfo fileInfo = fileInfoRepositories.findByProductId(productId);
+        return fileInfo.getStorageFileName();
+    }
+
+    @Override
+    public List<FileInfoDto> getFilesInfo() {
+        return FileInfoDto.of(fileInfoRepositories.findAll());
+    }
+
+    @Override
+    public List<FileInfoDto> getFilesInfoByProductId(Set<Long> keys) {
+        return FileInfoDto.of(fileInfoRepositories.findByProductIdIn(keys));
+    }
+
+    @Override
+    public String uploadFileAccount(MultipartFile multipartFile, String username) {
+        try {
+            String extension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
+            String storageName = UUID.randomUUID().toString() +  extension;
+            Account account = accountRepository.findByEmail(username).orElseThrow();
+            FileInfo fileInfo = FileInfo.builder()
+                    .type(multipartFile.getContentType())
+                    .originalFileName(multipartFile.getOriginalFilename())
+                    .storageFileName(storageName)
+                    .size(multipartFile.getSize())
+                    .url(storagePath  + storageName)
+                    .account(account)
+                    .build();
+            Files.copy(multipartFile.getInputStream(), Paths.get(storagePath, storageName));
+            fileInfoRepositories.save(fileInfo);
+            return fileInfo.getStorageFileName();
+        } catch (IOException e) {
+            throw new IllegalArgumentException(e);
+
+        }
+    }
+
+    @Override
+    public String getStorageFileNameAccount(String username) {
+        Account account = accountRepository.findByEmail(username).orElseThrow();
+        FileInfo fileInfo = fileInfoRepositories.findByAccountId(account.getId());
+        return fileInfo.getStorageFileName();
+        }
 
 }

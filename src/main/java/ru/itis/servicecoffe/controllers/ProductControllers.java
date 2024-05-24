@@ -56,7 +56,8 @@ public class ProductControllers {
     @GetMapping("/products")
     public String getProductsPages(Model model, @RequestParam(value = "q", required = false) String query) {
             List<ProductDto> productSearch = productService.search(10, 0, query, null, null);
-            if (!productSearch.isEmpty()) {
+            System.out.println(!productSearch.isEmpty());
+            if (productSearch != null) {
                 model.addAttribute("products", productSearch);
                 model.addAttribute("photos", fileServices.getFilesInfo());
                 return "buyProduct";

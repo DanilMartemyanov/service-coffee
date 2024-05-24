@@ -10,14 +10,17 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import ru.itis.servicecoffe.dto.ProductIdForm;
 import ru.itis.servicecoffe.services.AccountService;
+import ru.itis.servicecoffe.services.FileAccountService;
 import ru.itis.servicecoffe.services.FileServices;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 public class AccountController {
     @Autowired
     AccountService accountService;
     @Autowired
-    FileServices fileServices;
+    FileAccountService fileAccountService;
     @GetMapping("/account")
     public String getAccountPage(Model model){
         final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
@@ -41,14 +44,21 @@ public class AccountController {
     @PostMapping("/addAccountPhoto")
     public ResponseEntity<String> addAccountPhoto(@RequestParam("file") MultipartFile file, Model model){
         final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
-        return  ResponseEntity.ok(fileServices.uploadFileAccount(file, userName));
+        System.out.println("addAccountPhoto");
+        return  ResponseEntity.ok(fileAccountService.uploadFileAccount(file, userName));
 
     }
 
     @GetMapping("/getPhotoAcount")
-    public ResponseEntity<String> getPhotoAccount(){
+    public ResponseEntity<String> getPhotoAccount(Model model){
         final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
-        return ResponseEntity.ok(fileServices.getStorageFileNameAccount(userName));
+        return ResponseEntity.ok(fileAccountService.getStorageFileNameAccount(userName));
+    }
+
+    @GetMapping("/account/images/{file-name:.+}")
+    public void getFile(@PathVariable("file-name") String fileName, HttpServletResponse response){
+        System.out.println(fileName);
+        fileAccountService.showFile(fileName, response);
     }
 
 }

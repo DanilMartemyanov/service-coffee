@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="/js/uploadFileAccount.js"></script>
     <title>Account</title>
 </head>
 <body>
+<script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc="
+        crossorigin="anonymous"></script>
 <nav class="bg-white dark:bg-gray-900 fixed w-full z-20 top-0 start-0 border-b border-gray-200 dark:border-gray-600">
     <div class="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto p-4">
         <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Что то будет</span>
@@ -34,16 +35,19 @@
 </nav>
 <div id="app" class="justify-center flex py-12 px-6 lg: px-8 pt-48">
     <div class="w-full max-w-sm bg-white border border-gray-200 rounded-lg shadow dark:bg-gray-800 dark:border-gray-700 py-12 ">
-        <div class="flex flex-col items-center pb-10" id="accountPhoto">
-<#--            <img class="w-24 h-24 mb-3 rounded-full shadow-lg" src='http://localhost:8080/images/' />-->
-
+        <div class="flex flex-col items-center pb-10">
+                <img id="accountPhoto" class="w-24 h-24 mb-3 rounded-full shadow-lg" />
             <h5 class="mb-1 text-xl font-medium text-gray-900 dark:text-white">${account.name}</h5>
-            <div class="flex mt-4 md:mt-6">
-                <input  type="file" name="filePhoto" id="filePhoto" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
-            </div>
-            <div class="flex mt-4 md:mt-6">
-                <button onclick="uploadFileAccount()" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Загрузить</button>
-            </div>
+            <form class="space-y-6">
+                <div class="flex mt-4 md:mt-6">
+
+                    <input  type="file" name="file" id="filePhoto" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >
+                </div>
+                <div class="flex mt-4 md:mt-6">
+                    <button type="submit" id="btnUploadFileAccount" class="inline-flex items-center px-4 py-2 text-sm font-medium text-center text-white bg-blue-700 rounded-lg hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800" >Загрузить</button>
+                </div>
+            </form>
+            <script src="/js/uploadFileAccount.js"></script>
         </div>
     </div>
 </div>

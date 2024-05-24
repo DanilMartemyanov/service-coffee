@@ -49,5 +49,5 @@ public class Account {
     private List<Product> products;
 
     @OneToMany(mappedBy = "account")
-    private List<FileInfo> avatars;
+    private List<FileAccount> avatars;
 }

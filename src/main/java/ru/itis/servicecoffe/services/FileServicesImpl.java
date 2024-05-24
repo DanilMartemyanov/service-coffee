@@ -89,34 +89,5 @@ public class FileServicesImpl implements FileServices {
         return FileInfoDto.of(fileInfoRepositories.findByProductIdIn(keys));
     }
 
-    @Override
-    public String uploadFileAccount(MultipartFile multipartFile, String username) {
-        try {
-            String extension = multipartFile.getOriginalFilename().substring(multipartFile.getOriginalFilename().lastIndexOf("."));
-            String storageName = UUID.randomUUID().toString() +  extension;
-            Account account = accountRepository.findByEmail(username).orElseThrow();
-            FileInfo fileInfo = FileInfo.builder()
-                    .type(multipartFile.getContentType())
-                    .originalFileName(multipartFile.getOriginalFilename())
-                    .storageFileName(storageName)
-                    .size(multipartFile.getSize())
-                    .url(storagePath  + storageName)
-                    .account(account)
-                    .build();
-            Files.copy(multipartFile.getInputStream(), Paths.get(storagePath, storageName));
-            fileInfoRepositories.save(fileInfo);
-            return fileInfo.getStorageFileName();
-        } catch (IOException e) {
-            throw new IllegalArgumentException(e);
-
-        }
-    }
-
-    @Override
-    public String getStorageFileNameAccount(String username) {
-        Account account = accountRepository.findByEmail(username).orElseThrow();
-        FileInfo fileInfo = fileInfoRepositories.findByAccountId(account.getId());
-        return fileInfo.getStorageFileName();
-        }
 
 }

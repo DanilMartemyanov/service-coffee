@@ -23,7 +23,6 @@ public interface FileServices {
 
     List<FileInfoDto> getFilesInfoByProductId(Set<Long> keys);
 
-    String uploadFileAccount(MultipartFile multipartFile, String username);
-    String getStorageFileNameAccount(String username);
+
 
 }

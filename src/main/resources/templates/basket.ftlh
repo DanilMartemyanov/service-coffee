@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="/js/booking.js"></script>
+    <script src="/js/updateBasket.js"></script>
     <title>Корзина</title>
 </head>
 <body>
@@ -35,6 +36,14 @@
                         <a href="/basket"
                            class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Корзина</a>
                     </li>
+                    <li>
+                        <a href="/bookingPayt"
+                           class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Order</a>
+                    </li>
+                    <li>
+                        <a href="/account"
+                           class="block py-2 px-3 text-gray-900 rounded hover:bg-gray-100 md:hover:bg-transparent md:hover:text-blue-700 md:p-0 md:dark:hover:text-blue-500 dark:text-white dark:hover:bg-gray-700 dark:hover:text-white md:dark:hover:bg-transparent dark:border-gray-700">Account</a>
+                    </li>
                 </ul>
             </div>
         </div>
@@ -54,6 +63,7 @@
                     <tr>
                         <td>${product.name}</td>
                         <td>${product.price}</td>
+                        <td><button onclick="updateBasket(${product.id})">Удалить</button></td>
                     </tr>
                 </#list>
                 </tbody>
@@ -75,11 +85,11 @@
         </table>
     </div>
     <h1 class="text-lg font-bold dark:text-white px-9"> К оплате: ${totalAmount}</h1>
-    <a href="/bookingPay">
-        <button  class="flex w-24  rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+        <button onclick="booking()"  class="flex w-24  rounded-md bg-slate-900 px-3 py-1.5 text-sm font-semibold leading-6 text-white shadow-sm hover:bg-red-400 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
             Оплатить заказ
         </button>
-    </a>
+<#--    <a href="/bookingPay">-->
+<#--    </a>-->
 
 </div>
 </body>

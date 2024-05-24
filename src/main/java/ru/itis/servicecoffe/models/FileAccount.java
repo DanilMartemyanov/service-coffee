@@ -4,14 +4,13 @@ import lombok.*;
 
 import javax.persistence.*;
 
-
 @Getter
 @Setter
 @Entity
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-public class FileInfo {
+public class FileAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,9 +19,7 @@ public class FileInfo {
     private String type;
     private Long size;
     private String url;
-
     @ManyToOne
-    @JoinColumn(name = "productId")
-    private Product product;
-
+    @JoinColumn(name = "accountId")
+    private Account account;
 }

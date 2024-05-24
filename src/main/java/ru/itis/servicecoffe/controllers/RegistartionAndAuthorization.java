@@ -19,8 +19,12 @@ public class RegistartionAndAuthorization {
     @PostMapping("/signUp")
     public String signUp(SignUpForms signUpForms){
         System.out.println(signUpForms.getRepeatPassword());
-        accountService.singUp(signUpForms);
-        return "redirect:/signIn";
+        if (!signUpForms.getPassword().equals(signUpForms.getRepeatPassword())){
+            return "signUp";
+        }else{
+            accountService.singUp(signUpForms);
+            return "redirect:/signIn";
+        }
     }
 
     @GetMapping("/signIn")

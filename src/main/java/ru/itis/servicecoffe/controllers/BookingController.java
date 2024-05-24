@@ -27,17 +27,18 @@ public class BookingController {
     @Autowired
     OrderService orderService;
 
-//    @PostMapping("/bookingPay")
-//    public ResponseEntity<String> getBookingPage(HttpSession session){
-//        System.out.println("postBooking");
-//        final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
-//        HashMap<Long, Integer> basket = (HashMap<Long, Integer>) session.getAttribute("basket");
-//        Set<Long> products = basket.keySet();
-//        OrderDto order = orderService.addOrder(products, userName);
-//        session.setAttribute("uniqueCode", order.getUuid());
-//        session.setAttribute("time", order.getOrderDeliveryTime());
-//        return ResponseEntity.ok(order.getOrderDeliveryTime());
-//    }
+    @PostMapping("/bookingPay")
+    public ResponseEntity<String> getBookingPage(HttpSession session){
+        System.out.println("postBooking");
+        final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
+        HashMap<Long, Integer> basket = (HashMap<Long, Integer>) session.getAttribute("basket");
+        Set<Long> products = basket.keySet();
+        ArrayList<Integer> countProducts = new ArrayList<>(basket.values());
+        OrderDto order = orderService.addOrder(products, userName, countProducts);
+        session.setAttribute("uniqueCode", order.getUuid());
+        session.setAttribute("time", order.getOrderDeliveryTime());
+        return ResponseEntity.ok("Приступили к готовке :/");
+    }
 
     @GetMapping("/bookingPay")
     public String getBookingPage(HttpSession session, Model model){
@@ -45,13 +46,8 @@ public class BookingController {
             model.addAttribute("basketError", "У вас нет текущих заказов :/");
             return "bookingError";
         }else {
-            final String userName= SecurityContextHolder.getContext().getAuthentication().getName();
-            HashMap<Long, Integer> basket = (HashMap<Long, Integer>) session.getAttribute("basket");
-            Set<Long> products = basket.keySet();
-            ArrayList<Integer> countProducts = new ArrayList<>(basket.values());
-            OrderDto order = orderService.addOrder(products, userName, countProducts);
-            session.setAttribute("uniqueCode", order.getUuid());
-            session.setAttribute("time", order.getOrderDeliveryTime());
+            session.setAttribute("uniqueCode", session.getAttribute("uniqueCode"));
+            session.setAttribute("time", session.getAttribute("time"));
             return "booking";
         }
 

@@ -65,8 +65,9 @@ public class BasketController {
     }
 
     @PostMapping("/updateBasket")
-    public void updateBasket(@RequestBody ProductIdForm productIdForm, HttpSession session){
+    public ResponseEntity<String> updateBasket(@RequestBody ProductIdForm productIdForm, HttpSession session){
         HashMap<Long, Integer> basket = (HashMap<Long, Integer>) session.getAttribute("basket");
         basket.remove(productIdForm.getProductId());
+        return ResponseEntity.ok("Будьте добры, обновите страничку :/");
     }
 }

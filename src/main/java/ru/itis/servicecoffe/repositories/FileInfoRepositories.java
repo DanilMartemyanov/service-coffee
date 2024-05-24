@@ -16,5 +16,4 @@ public interface FileInfoRepositories extends JpaRepository<FileInfo, Long> {
 
     boolean existsByProductId(Long productId);
 
-    FileInfo findByAccountId(Long accountId);
 }

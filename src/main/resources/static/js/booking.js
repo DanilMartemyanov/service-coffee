@@ -1,8 +1,6 @@
-async function booking(products, counts){
-    await fetch("/booking/pay",{
+async function booking(){
+    console.log("booking")
+    await fetch("/bookingPay",{
         method:"POST",
-    }).then(res => fetch("/booking/pay"),{
-        method: "GET",
-
-    });
+    }).then(res => alert("Приступили к готовке заказа"));
 }

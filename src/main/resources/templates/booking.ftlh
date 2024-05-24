@@ -34,7 +34,6 @@
         </div>
     </nav>
     <div class="pt-48">
-        <h1>${uniqueCode}</h1>
         <h1 class="text-5xl font-extrabold dark:text-white">Ваш код для получения заказа: ${uniqueCode}<small class="ms-2 font-semibold text-gray-500 dark:text-gray-400">Это наш с вами секрет</small></h1>
 
     </div>

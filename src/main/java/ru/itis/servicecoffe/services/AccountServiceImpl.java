@@ -18,6 +18,8 @@ import java.util.UUID;
 
 @Component
 public class AccountServiceImpl implements AccountService{
+    // TODO: избранное , query,
+
     @Autowired
     PasswordEncoder passwordEncoder;
     @Autowired

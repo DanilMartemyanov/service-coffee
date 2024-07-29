@@ -22,7 +22,7 @@ public class ConvertTimeImpl implements Converter<Integer, LocalTime> {
     public LocalTime convert(Integer integer) {
         if(integer >60){
             int hours = integer/60;
-            int minutes = integer%100;
+            int minutes = integer%60;
             return LocalTime.now().plusHours(hours).plusMinutes(minutes);
         }
         return LocalTime.now().plusMinutes(integer);
